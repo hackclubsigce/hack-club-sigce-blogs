@@ -1,3 +1,4 @@
+import Link from "next/link"
 const Navbar = () => {
     return (
         <nav className='navbar navbar-dark bg-dark'>
