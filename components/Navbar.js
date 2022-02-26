@@ -2,7 +2,11 @@ const Navbar = () => {
     return (
         <nav className='navbar navbar-dark bg-dark'>
             <div className='container-fluid'>
-                <a className='navbar-brand' href='/'>Hack Club SIGCE Blogs</a>
+                <Link href='/'>
+                    <div className='navbar-brand'>
+                        Hack Club SIGCE Blogs
+                    </div>
+                </Link>
             </div>
         </nav>
     )

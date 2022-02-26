@@ -29,11 +29,11 @@ const Blogpost = (props) => {
                 <div dangerouslySetInnerHTML={{ __html: item.blogContent }}></div>
                 <div className="socialContainer mt-5">
                   <div className="text-center socialLinks">
-                    <a href={item.github} target="_blank" className="github">
+                    <a href={item.github} rel="noreferrer" target="_blank" className="github">
                       <i className="socialHover fab fa-github"></i>
                       <p>{item.firstName}'s GitHub</p>
                     </a>
-                    <a href={item.linkedin} target="_blank" className="linkedin">
+                    <a href={item.linkedin} rel="noreferrer" target="_blank" className="linkedin">
                       <i className="socialHover fab fa-linkedin"></i>
                       <p>{item.firstName}'s Linkedin</p>
                     </a>
@@ -54,7 +54,7 @@ const Blogpost = (props) => {
                   let path = relatedPost.shortTitle.split(" ");
                   let finalPath = path.join("-")
                   return (
-                    <RelatedPost title={relatedPost.shortTitle} link={finalPath} desc={relatedPost.shortDesc} />
+                    <RelatedPost title={relatedPost.shortTitle} key={relatedPost.id} link={finalPath} desc={relatedPost.shortDesc} />
                   )
                 })
               }
