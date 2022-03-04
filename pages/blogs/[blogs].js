@@ -4,11 +4,10 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import RelatedPost from '../../components/RelatedPost';
 const Blogpost = ({ item, relatedPosts }) => {
-  console.log(item);
   return (
     <>
       <Head>
-        <title>{item.shortTitle}</title>
+        {/* <title>{item.shortTitle}</title> */}
       </Head>
       <Navbar />
       <div className="container mt-5">
@@ -31,11 +30,11 @@ const Blogpost = ({ item, relatedPosts }) => {
                   <div className="text-center socialLinks">
                     <a href={item.github} rel="noreferrer" target="_blank" className="github">
                       <i className="socialHover fab fa-github"></i>
-                      <p>{item.firstName}'s GitHub</p>
+                      <p>{item.firstName}s GitHub</p>
                     </a>
                     <a href={item.linkedin} rel="noreferrer" target="_blank" className="linkedin">
                       <i className="socialHover fab fa-linkedin"></i>
-                      <p>{item.firstName}'s Linkedin</p>
+                      <p>{item.firstName}s Linkedin</p>
                     </a>
                   </div>
                 </div>
@@ -72,10 +71,11 @@ export default Blogpost
 export const getStaticPaths = async () => {
   let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
   let data = await res.json();
-  let items = data.items
-  let paths = items.map((item) => {
+  let items = await data.items
+  let paths = await items.map((item) => {
     let path = item.shortTitle.split(" ");
-    let finalPath = path.join("-")
+    let finalPath = path.join("-");
+    console.log(typeof(finalPath))
     return {
       params: {
         blogs: finalPath,
@@ -84,7 +84,7 @@ export const getStaticPaths = async () => {
   });
   return {
     paths,
-    fallback: true
+    fallback: false
   }
 }
 
@@ -97,7 +97,7 @@ export const getStaticProps = async (context) => {
     let path = data.items[i].shortTitle.split(" ");
     let finalPath = path.join("-")
     if (context.params.blogs === finalPath) {
-      item = data.items[i]
+      item = await data.items[i]
     }
   }
   for (let j = 0; j < data.items.length; j++) {
