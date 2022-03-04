@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import RelatedPost from '../../components/RelatedPost';
-const Blogpost = (props) => {
-  const { item, relatedPosts } = props;
+const Blogpost = ({ item, relatedPosts }) => {
+  console.log(item);
   return (
     <>
       <Head>
