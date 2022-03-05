@@ -89,7 +89,7 @@ export async function getServerSideProps(context) {
     let finalPath = path.join("-");
     return finalPath;
   }
-  relatedPosts = relatedPosts.slice(0, 7)
+  relatedPosts = relatedPosts.slice(0, 7);
   return {
     props: {
       item,
