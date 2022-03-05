@@ -76,7 +76,7 @@ export async function getServerSideProps(context) {
   for (let i = 0; i < data.items.length; i++) {
     let finalPath = hyphen(data.items[i].shortTitle);
     if (context.params.blogs === finalPath) {
-      item = await data.items[i]
+      item = await data.items[i];
     }
   }
   for (let j = 0; j < data.items.length; j++) {
