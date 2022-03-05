@@ -3,8 +3,9 @@ import BlogsCard from './BlogsCard'
 const BlogsTitleContainer = (props) => {
   const { items } = props;
   let arr = [];
-  for (let i = items.length - 1; i > 0; i--) {
+  for (let i = items.length - 1; i >= 0; i--) {
     arr.push(items[i])
+    console.log(items[i].id)
   }
   return (
     <div className='mt-3 w-75 m-auto'>

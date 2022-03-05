@@ -9,6 +9,7 @@ export async function getServerSideProps() {
   let finalData = [];
   for (let i = 0; i < data.items.length; i++) {
     finalData.push(data.items[i])
+    // console.log(data.items[i].id)
   }
   return{
     props: {
