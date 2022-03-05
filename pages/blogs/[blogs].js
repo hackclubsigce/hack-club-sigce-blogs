@@ -7,7 +7,7 @@ const Blogpost = ({ item, relatedPosts }) => {
   return (
     <>
       <Head>
-        {/* <title>{item.shortTitle}</title> */}
+        <title>{item.shortTitle}</title>
       </Head>
       <Navbar />
       <div className="container mt-5">
@@ -22,7 +22,7 @@ const Blogpost = ({ item, relatedPosts }) => {
                 <a className="badge bg-secondary text-decoration-none link-light" href="#!">{item.tags[0]}</a>
               </header>
               <div className="mb-4">
-                <img className="img-fluid rounded" src="${json.items[i].img}" alt="" />
+                <img className="img-fluid rounded" src={item.img} alt="" />
               </div>
               <section className="mb-5">
                 <div dangerouslySetInnerHTML={{ __html: item.blogContent }}></div>
@@ -68,42 +68,26 @@ const Blogpost = ({ item, relatedPosts }) => {
 
 export default Blogpost
 
-export const getStaticPaths = async () => {
-  let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
-  let data = await res.json();
-  let items = await data.items
-  let paths = await items.map((item) => {
-    let path = item.shortTitle.split(" ");
-    let finalPath = path.join("-");
-    console.log(typeof(finalPath))
-    return {
-      params: {
-        blogs: finalPath,
-      },
-    }
-  });
-  return {
-    paths,
-    fallback: false
-  }
-}
-
-export const getStaticProps = async (context) => {
+export async function getServerSideProps(context) {
   let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
   let data = await res.json();
   let item;
   let relatedPosts = [];
   for (let i = 0; i < data.items.length; i++) {
-    let path = data.items[i].shortTitle.split(" ");
-    let finalPath = path.join("-")
+    let finalPath = hyphen(data.items[i].shortTitle);
     if (context.params.blogs === finalPath) {
       item = await data.items[i]
     }
   }
   for (let j = 0; j < data.items.length; j++) {
-    if (data.items[j].category === item.category) {
+    if (data.items[j].category === await item.category) {
       relatedPosts.push(data.items[j])
     }
+  }
+  function hyphen(data){
+    let path = data.split(" ");
+    let finalPath = path.join("-")
+    return finalPath;
   }
   relatedPosts = relatedPosts.slice(0, 7)
   return {
@@ -113,3 +97,29 @@ export const getStaticProps = async (context) => {
     }
   }
 }
+
+// export const getStaticProps = async (context) => {
+//   let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
+//   let data = await res.json();
+//   let item;
+//   let relatedPosts = [];
+//   for (let i = 0; i < data.items.length; i++) {
+//     let path = data.items[i].shortTitle.split(" ");
+//     let finalPath = path.join("-")
+//     if (context.params.blogs === finalPath) {
+//       item = await data.items[i]
+//     }
+//   }
+//   for (let j = 0; j < data.items.length; j++) {
+//     if (data.items[j].category === item.category) {
+//       relatedPosts.push(data.items[j])
+//     }
+//   }
+//   relatedPosts = relatedPosts.slice(0, 7)
+//   return {
+//     props: {
+//       item,
+//       relatedPosts
+//     }
+//   }
+// }

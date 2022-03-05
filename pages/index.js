@@ -3,7 +3,7 @@ import Container from '../components/Container'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 
-export async function getStaticProps(){
+export async function getServerSideProps() {
   let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
   let data = await res.json();
   let finalData = [];
@@ -16,6 +16,7 @@ export async function getStaticProps(){
     }
   }
 }
+
 export default function Home({data}) {
   return (
     <>
