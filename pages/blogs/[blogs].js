@@ -97,29 +97,3 @@ export async function getServerSideProps(context) {
     }
   }
 }
-
-// export const getStaticProps = async (context) => {
-//   let res = await fetch('https://hack-club-sigce-blogs.web.app/js/json/content.json')
-//   let data = await res.json();
-//   let item;
-//   let relatedPosts = [];
-//   for (let i = 0; i < data.items.length; i++) {
-//     let path = data.items[i].shortTitle.split(" ");
-//     let finalPath = path.join("-")
-//     if (context.params.blogs === finalPath) {
-//       item = await data.items[i]
-//     }
-//   }
-//   for (let j = 0; j < data.items.length; j++) {
-//     if (data.items[j].category === item.category) {
-//       relatedPosts.push(data.items[j])
-//     }
-//   }
-//   relatedPosts = relatedPosts.slice(0, 7)
-//   return {
-//     props: {
-//       item,
-//       relatedPosts
-//     }
-//   }
-// }
