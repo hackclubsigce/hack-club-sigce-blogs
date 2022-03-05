@@ -86,7 +86,7 @@ export async function getServerSideProps(context) {
   }
   function hyphen(data){
     let path = data.split(" ");
-    let finalPath = path.join("-")
+    let finalPath = path.join("-");
     return finalPath;
   }
   relatedPosts = relatedPosts.slice(0, 7)
