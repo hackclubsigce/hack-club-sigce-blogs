@@ -81,7 +81,7 @@ export async function getServerSideProps(context) {
   }
   for (let j = 0; j < data.items.length; j++) {
     if (data.items[j].category === await item.category) {
-      relatedPosts.push(data.items[j])
+      relatedPosts.push(data.items[j]);
     }
   }
   function hyphen(data){
