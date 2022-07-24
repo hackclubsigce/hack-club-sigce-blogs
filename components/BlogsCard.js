@@ -11,9 +11,9 @@ const BlogsCard = (props) => {
     <li className="blogPost">
         <div className="blogTextContent">
           <div className="titleTags" >
-            <a className="blogTitle">{data.shortTitle}</a>
+            <a className="blogTitle" dangerouslySetInnerHTML={{_html: data.shortTitle}}></a>
           </div>
-          <div className="blogDesc">{data.shortDesc}</div>
+          <div className="blogDesc" dangerouslySetInnerHTML={{_html: data.shortDesc}}></div>
         </div>
         <div className="readMoreBtn">
           <button className="readMore">Read</button>
